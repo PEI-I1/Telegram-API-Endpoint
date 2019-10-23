@@ -1,5 +1,6 @@
 import requests
-from config import TELEGRAM_SEND_MESSAGE_URL, TELEGRAM_SEND_PHOTO_URL, TELEGRAM_SEND_AUDIO_URL
+from config import TELEGRAM_SEND_MESSAGE_URL, TELEGRAM_SEND_MESSAGE_URL_BASE, TELEGRAM_SEND_PHOTO_URL, TELEGRAM_SEND_AUDIO_URL
+import json
 
 class Bot:
 
@@ -13,6 +14,30 @@ class Bot:
     def send_message(self):
 
         res = requests.get(TELEGRAM_SEND_MESSAGE_URL.format(self.chat, self.message_send))
+        if res.status_code == 200:
+            return True
+        else:
+            return False
+
+    def get_location(self):
+
+        reply_markup={
+            'keyboard': [
+                [{
+                    'text': 'Send Location',
+                    'request_location': True
+                }]
+            ]
+        }
+        
+        payload = {
+            'chat_id': self.chat,
+            'text': 'Clique no botão em baixo para podermos saber onde está',
+            'reply_markup': json.dumps(reply_markup)
+        }
+
+        res = requests.post(TELEGRAM_SEND_MESSAGE_URL_BASE, data=payload)
+
         if res.status_code == 200:
             return True
         else:
@@ -54,6 +79,8 @@ class Bot:
             success = self.send_photo()
         elif self.message_received in ['áudio', 'audio']:
             success = self.send_audio()
+        elif self.message_received in ['localização', 'location']:
+            success = self.get_location()
         else:
             self.message_send = 'What do you mean?'
             success = self.send_message()

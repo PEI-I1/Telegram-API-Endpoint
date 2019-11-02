@@ -1,5 +1,5 @@
-BOT_TOKEN = ''
-NGROK_URL = ''
+BOT_TOKEN = '1001785159:AAETrxxEaYULQ3BUFQr5C8PTDhN3pjk8IAM'
+NGROK_URL = 'https://fdee2ada.ngrok.io'
 CHAT_PROCESSOR_URL = 'http://localhost:8001'
 LOCAL_WEBHOOK_ENDPOINT = '{}/webhook'.format(NGROK_URL)
 BASE_TELEGRAM_API_URL = 'https://api.telegram.org/bot' + BOT_TOKEN

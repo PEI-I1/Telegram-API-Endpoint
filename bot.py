@@ -24,11 +24,11 @@ class Bot:
             self.name += " " + message['from']['last_name']
 
     def get_response(self):
-        data = "{idChat='" + str(self.chat)
-        data += "', idUser='" + str(self.user)
-        data += "', msg='" + self.message_received
-        data += "', name='" + self.name
-        data += "'}"
+        data = {}
+        data['idChat'] = str(self.chat)
+        data['idUser'] = str(self.user)
+        data['msg'] = self.message_received
+        data['name'] = self.name
 
         res = requests.post(CHAT_PROCESSOR_URL + "/getResponse", json=data)
         self.message_send = res.text

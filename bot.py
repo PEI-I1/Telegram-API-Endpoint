@@ -18,7 +18,10 @@ class Bot:
 
         self.message_send = None        # Message to send to Telegram chat
 
-        self.name = message['from']['first_name']+ " " + message['from']['last_name']  # Name of the user
+        # Name of the user 
+        self.name = message['from']['first_name'] 
+        if 'last_name' in message['from']:
+            self.name += " " + message['from']['last_name']
 
     def get_response(self):
         data = "{idChat='" + str(self.chat)

@@ -11,10 +11,9 @@ requests.get(TELEGRAM_INIT_WEBHOOK_URL)
 def index():
     req = request.get_json()
     print(req)
-    bot = Bot()
-    bot.parse_data(req)
-    success = bot.action()
-    #return jsonify(success=success) # not enough
+    bot = Bot(req)
+    bot.get_response()
+    bot.send_message()
     return 'ok'
 
 if __name__ == '__main__':

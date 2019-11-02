@@ -12,7 +12,7 @@ class Bot:
 
         # Message received on Telegram chat
         if 'text' in message:
-            self.message_received = str(message['text'].encode('utf-8'))
+            self.message_received = str(message['text'].encode('utf-8'), encoding='utf-8')
         else:
             self.message_received = ''
 

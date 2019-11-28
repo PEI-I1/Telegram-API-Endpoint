@@ -17,4 +17,4 @@ def index():
     return 'ok'
 
 if __name__ == '__main__':
-    app.run(port=8000)
+    app.run(port=5000)

@@ -23,12 +23,20 @@ class Bot:
         if 'last_name' in message['from']:
             self.name += " " + message['from']['last_name']
 
+        # Location
+        if 'location' in message:
+            loc = message['location']
+            self.location = {'lon': loc['longitude'], 'lat': loc['latitude']}
+        else:
+            self.location = None
+
     def get_response(self):
         data = {}
         data['idChat'] = str(self.chat)
         data['idUser'] = str(self.user)
         data['msg'] = self.message_received
         data['name'] = self.name
+        data['location'] = self.location
 
         res = requests.post(CHAT_PROCESSOR_URL + "/getResponse", json=data)
         self.message_send = res.text
@@ -40,7 +48,7 @@ class Bot:
         else:
             return False
 
-    def get_location(self):
+    def get_location(idChat):
 
         reply_markup={
             'keyboard': [
@@ -52,30 +60,13 @@ class Bot:
         }
         
         payload = {
-            'chat_id': self.chat,
+            'chat_id': idChat,
             'text': 'Clique no botão em baixo para podermos saber onde está',
             'reply_markup': json.dumps(reply_markup)
         }
 
         res = requests.post(TELEGRAM_SEND_MESSAGE_URL_BASE, data=payload)
 
-        if res.status_code == 200:
-            return True
-        else:
-            return False
-
-    def send_photo(self):
-
-        res = requests.get(TELEGRAM_SEND_PHOTO_URL.format(self.chat, 'https://www.himgs.com/imagenes/hello/social/hello-fb-logo.png', '<b>Just a photo</b>', 'HTML'))
-        
-        if res.status_code == 200:
-            return True
-        else:
-            return False
-
-    def send_audio(self):
-
-        res = requests.get(TELEGRAM_SEND_AUDIO_URL.format(self.chat, 'http://soundbible.com/mp3/Hello-SoundBible.com-218208532.mp3', '<em>Just to say hello</em>', 'HTML'))
         if res.status_code == 200:
             return True
         else:

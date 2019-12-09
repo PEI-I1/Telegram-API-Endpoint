@@ -16,5 +16,12 @@ def index():
     bot.send_message()
     return 'ok'
 
+@app.route('/get_location/<string:idChat>', methods=['GET'])
+def get_location(idChat):
+    req = request.get_json()
+    print(req)
+    Bot.get_location(idChat)
+    return 'ok'
+
 if __name__ == '__main__':
     app.run(port=5000)

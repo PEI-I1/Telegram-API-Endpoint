@@ -42,7 +42,7 @@ class Bot:
         self.message_send = res.text
 
     def send_message(self):
-        res = requests.get(TELEGRAM_SEND_MESSAGE_URL.format(self.chat, self.message_send))
+        res = requests.get(TELEGRAM_SEND_MESSAGE_URL.format(self.chat, self.message_send, 'HTML'))
         if res.status_code == 200:
             return True
         else:

@@ -16,7 +16,7 @@ def index():
 
 @app.route('/send_message/<string:idChat>', methods=['POST'])
 def send_message(idChat):
-    bot.send_message_to_user(idChat, request.get_data().decode('latin-1'))
+    bot.send_message_to_user(idChat, request.get_data().decode('utf-8'))
     return 'ok'
 
 @app.route('/get_location/<string:idChat>', methods=['GET'])

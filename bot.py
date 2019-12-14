@@ -37,6 +37,13 @@ def send_message_to_user(idChat, msg):
     else:
         return False
 
+def send_photo_to_user(idChat, photo_url, caption):
+    res = requests.get(TELEGRAM_SEND_PHOTO_URL.format(idChat, photo_url, caption, 'HTML'))
+    if res.status_code == 200:
+        return True
+    else:
+        return False
+
 def get_location(idChat):
 
     reply_markup={

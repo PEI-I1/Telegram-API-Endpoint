@@ -10,7 +10,8 @@ class Bot:
         self.chat = None                # ID of Telegram chat
         self.message_received = None    # Message received on Telegram chat
         self.first_name = None          # First name of the user
-        self.msg_count = 1
+        self.msg_count = 1              # To control the test order
+        self.inputs = []                # Save inputs received
     
     def send_message(self, html_text):
 
@@ -36,6 +37,13 @@ class Bot:
         self.chat = message['chat']['id']
         self.message_received = message['text'].lower()
         self.first_name = message['from']['first_name']
+        self.inputs.append(self.message_received)
+
+    def save_on_file(self):
+        f = open("inputs_received.txt", "a")
+        for input in self.inputs:
+            f.write(input + '\n')
+        f.close()
 
     def action(self):
         if self.message_received == '/start':
@@ -143,7 +151,7 @@ class Bot:
                 )
             elif self.msg_count == 10:
                 # Pedir ao utilizador para consultar os telemóveis que se encontram em promoção.
-                self.send_message('Os telemóveis que se encontram de momento em promoção são:')
+                self.send_message('Os telemóveis que correspondem à procura são:')
                 self.send_message(
                     '<b>Modelo:</b> Huawei P30 Pro\n' +
                     '<b>Preço:</b> 899,99€'
@@ -166,18 +174,27 @@ class Bot:
                 )
             elif self.msg_count == 11:
                 # Pedir ao utilizador para consultar tarifários WTF.
-                self.send_message('Os tarifários WTF existentes são:')
+                self.send_message('Os pacotes WTF que correspondem à procura são:')
                 self.send_message(
                     '<b>Nome:</b> WTF 1GB\n' +
-                    '<b>Preço:</b> 2.75€/semana'
+                    '<b>Preço:</b> 2.75/semana\n' +
+                    '<b>Net:</b> 1GB/mês\n' +
+                    '<b>SMS:</b> SMS grátis para todas as redes\n' +
+                    '<b>Chamadas:</b> 1000 minutos para todas as redes'
                 )
                 self.send_message(
                     '<b>Nome:</b> WTF 5GB\n' +
-                    '<b>Preço:</b> 3.99€/semana'
+                    '<b>Preço:</b> 3.99/semana\n' +
+                    '<b>Net:</b> 5GB/mês\n' +
+                    '<b>SMS:</b> SMS grátis para todas as redes\n' +
+                    '<b>Chamadas:</b> 5000 minutos para todas as redes'
                 )
                 self.send_message(
                     '<b>Nome:</b> WTF 10GB\n' +
-                    '<b>Preço:</b> 4.99€/semana'
+                    '<b>Preço:</b> 4.99/semana\n' +
+                    '<b>Net:</b> 5GB/mês\n' +
+                    '<b>SMS:</b> SMS grátis para todas as redes\n' +
+                    '<b>Chamadas:</b> 10000 minutos para todas as redes'
                 )
             elif self.msg_count == 12:
                 # Pedir ao utilizador para consultar os pacotes fibra até 25€ por mês.

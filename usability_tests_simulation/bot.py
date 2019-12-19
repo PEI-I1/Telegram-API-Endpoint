@@ -144,7 +144,7 @@ class Bot:
                 self.send_message('Sony Xperia 1')
                 self.send_message(
                     '<b>Preço:</b> 959,99€\n' +
-                    '<b>Preço:</b> Coluna Bluetooth\n' +
+                    '<b>Ofertas:</b> Coluna Bluetooth\n' +
                     '<b>Link:</b> https://www.nos.pt/particulares/loja-equipamentos/pages/details.aspx?p=29783\n' +
                     '* possibilidade de pagamento em prestações\n' +
                     '* possibilidade de pagamento com pontos'
@@ -243,7 +243,7 @@ class Bot:
                 self.send_message(
                     '<b>Nome:</b> Loja NOS Portalegre - Continente\n' +
                     '<b>Morada:</b> CC Continente Portalegre - R. Joinal, 12 - lj. 1 Portalegre 7300-526\n' +
-                    '<b>Serviço:</b> Segunda a Sexta: 09h00 - 21h00 Sábado: 09h00 - 21h00 Domingo: 09h00 - 21h00'
+                    '<b>Horário:</b> Segunda a Sexta: 09h00 - 21h00\nSábado: 09h00 - 21h00\nDomingo: 09h00 - 21h00'
                 )
             elif self.msg_count > 14:
                 self.send_message('Chegaste ao fim do teste!')

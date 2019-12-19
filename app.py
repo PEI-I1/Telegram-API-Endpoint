@@ -14,7 +14,10 @@ requests.get(TELEGRAM_INIT_WEBHOOK_URL)
 def index():
     req = request.get_json()
     print(req)
-    bot.send_message_to_chat_processor(req)
+    # only tries to answer to user if user sends text or location
+    if "message" in req and \
+       ("location" in req["message"] or "text" in req["message"]):
+        bot.send_message_to_chat_processor(req)
     return 'ok'
 
 @app.route('/send_message/<string:idChat>', methods=['POST'])

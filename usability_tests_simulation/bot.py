@@ -243,7 +243,9 @@ class Bot:
                 self.send_message(
                     '<b>Nome:</b> Loja NOS Portalegre - Continente\n' +
                     '<b>Morada:</b> CC Continente Portalegre - R. Joinal, 12 - lj. 1 Portalegre 7300-526\n' +
-                    '<b>Horário:</b> Segunda a Sexta: 09h00 - 21h00\nSábado: 09h00 - 21h00\nDomingo: 09h00 - 21h00'
+                    '<b>Horário:</b> Segunda a Sexta: 09h00 - 21h00\n' +
+                    '               Sábado: 09h00 - 21h00\n' + 
+                    '               Domingo: 09h00 - 21h00'
                 )
             elif self.msg_count > 14:
                 self.send_message('Chegaste ao fim do teste!')

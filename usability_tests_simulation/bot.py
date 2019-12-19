@@ -192,7 +192,7 @@ class Bot:
                 self.send_message(
                     '<b>Nome:</b> WTF 10GB\n' +
                     '<b>Preço:</b> 4.99/semana\n' +
-                    '<b>Net:</b> 5GB/mês\n' +
+                    '<b>Net:</b> 10GB/mês\n' +
                     '<b>SMS:</b> SMS grátis para todas as redes\n' +
                     '<b>Chamadas:</b> 10000 minutos para todas as redes'
                 )

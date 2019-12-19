@@ -144,7 +144,7 @@ class Bot:
                 self.send_message('Sony Xperia 1')
                 self.send_message(
                     '<b>Preço:</b> 959,99€\n' +
-                    '<b>Preço:</b> Coluna Bluetooth\n' +
+                    '<b>Ofertas:</b> Coluna Bluetooth\n' +
                     '<b>Link:</b> https://www.nos.pt/particulares/loja-equipamentos/pages/details.aspx?p=29783\n' +
                     '* possibilidade de pagamento em prestações\n' +
                     '* possibilidade de pagamento com pontos'
@@ -192,7 +192,7 @@ class Bot:
                 self.send_message(
                     '<b>Nome:</b> WTF 10GB\n' +
                     '<b>Preço:</b> 4.99/semana\n' +
-                    '<b>Net:</b> 5GB/mês\n' +
+                    '<b>Net:</b> 10GB/mês\n' +
                     '<b>SMS:</b> SMS grátis para todas as redes\n' +
                     '<b>Chamadas:</b> 10000 minutos para todas as redes'
                 )

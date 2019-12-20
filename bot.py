@@ -1,5 +1,5 @@
 import requests
-from config import TELEGRAM_SEND_MESSAGE_URL, TELEGRAM_SEND_MESSAGE_URL_BASE, TELEGRAM_SEND_PHOTO_URL, TELEGRAM_SEND_AUDIO_URL, CHAT_PROCESSOR_URL
+from config import TELEGRAM_SEND_MESSAGE_URL, TELEGRAM_SEND_MESSAGE_URL_BASE, TELEGRAM_SEND_PHOTO_URL, TELEGRAM_SEND_AUDIO_URL, CHAT_PROCESSOR_URL, TELEGRAM_SEND_TYPING_ACTION
 import json
 
 def send_message_to_chat_processor(req):
@@ -44,6 +44,10 @@ def send_photo_to_user(idChat, photo_url, caption):
     else:
         return False
 
+def send_typing_action(idChat):
+    res = requests.get(TELEGRAM_SEND_TYPING_ACTION.format(idChat, 'typing'))
+    
+    
 def get_location(idChat):
 
     reply_markup={

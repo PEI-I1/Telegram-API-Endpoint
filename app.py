@@ -35,5 +35,11 @@ def get_location(idChat):
     bot.get_location(idChat)
     return 'ok'
 
+@app.route('/send_typing_act/<string:idChat>', methods['POST'])
+def send_typing_action(idChat):
+    bot.send_typing_action(idChat)
+    return 'ok'
+
+
 if __name__ == '__main__':
     app.run(port=5000)

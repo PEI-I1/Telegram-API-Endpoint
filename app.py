@@ -38,7 +38,7 @@ def get_location(idChat):
     bot.get_location(idChat)
     return 'ok'
 
-@app.route('/send_typing_act/<string:idChat>', methods['POST'])
+@app.route('/send_typing_act/<string:idChat>', methods=['POST'])
 def send_typing_action(idChat):
     bot.send_typing_action(idChat)
     return 'ok'

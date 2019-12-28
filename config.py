@@ -1,6 +1,6 @@
 import os
 
-BOT_TOKEN = os.getenv('BOT_TOKEN', '')
+BOT_TOKEN = os.getenv('BOT_TOKEN', '001785159:AAGr9M1x6FsX8Wj4v39dgnRPZV140DuA6Kk')
 NGROK_URL = os.getenv('NGROK_URL', '')
 CHAT_PROCESSOR_URL = os.getenv('CHAT_PROCESSOR_URL', 'http://localhost:5001')
 LOCAL_WEBHOOK_ENDPOINT = '{}/webhook'.format(NGROK_URL)

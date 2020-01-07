@@ -33,6 +33,14 @@ def send_photo(idChat):
     bot.send_photo_to_user(idChat, photo_url, caption)
     return 'ok'
 
+@app.route('/send_keyboard/<string:idChat>', methods=['POST'])
+def send_keyboard(idChat):
+    json_object = json.loads(request.get_data().decode('utf-8'))
+    text = json_object['text']
+    keyboard = json_object['keyboard']
+    bot.send_keyboard_to_user(idChat, text, keyboard)
+    return 'ok'
+
 @app.route('/get_location/<string:idChat>', methods=['GET'])
 def get_location(idChat):
     bot.get_location(idChat)

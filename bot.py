@@ -40,6 +40,8 @@ def send_message_to_chat_processor(req):
         data['name'] = message['message']['from']['first_name']
         if 'last_name' in message['message']['from']:
             data['name'] += " " + message['message']['from']['last_name']
+
+	data['location'] = None
     
     #Avisa chat_processor que chegou uma nova msg
     res = requests.post(CHAT_PROCESSOR_URL + "/getResponse", json=data)

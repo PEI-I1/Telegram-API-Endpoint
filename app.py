@@ -15,8 +15,7 @@ def index():
     req = request.get_json()
     print(req)
     # only tries to answer to user if user sends text or location
-    if "message" in req and \
-       ("location" in req["message"] or "text" in req["message"]):
+    if ("message" in req and ("location" in req["message"] or "text" in req["message"])) or "callback_query" in req:
         bot.send_message_to_chat_processor(req)
     return 'ok'
 

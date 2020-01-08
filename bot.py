@@ -37,9 +37,9 @@ def send_message_to_chat_processor(req):
 
         data['msg'] = str(message['data'].encode('utf-8'), encoding='utf-8')
 
-        data['name'] = message['message']['from']['first_name']
-        if 'last_name' in message['message']['from']:
-            data['name'] += " " + message['message']['from']['last_name']
+        data['name'] = message['chat']['first_name']
+        if 'last_name' in message['chat']:
+            data['name'] += " " + message['chat']['last_name']
 
 	data['location'] = None
     

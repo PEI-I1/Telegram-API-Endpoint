@@ -102,3 +102,9 @@ venv.bak/
 
 # mypy
 .mypy_cache/
+
+# macOS artifacts
+**/.DS_Store
+**/._*
+
+**/inputs_received.txt

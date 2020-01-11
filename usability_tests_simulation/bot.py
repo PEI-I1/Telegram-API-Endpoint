@@ -1,7 +1,8 @@
 import requests
-from config import TELEGRAM_SEND_MESSAGE_URL, TELEGRAM_SEND_PHOTO_URL
+from config import TELEGRAM_SEND_MESSAGE_URL, TELEGRAM_SEND_PHOTO_URL, TELEGRAM_SEND_TYPING_ACTION
 import json
 import re
+import time
 
 class Bot:
 
@@ -29,6 +30,9 @@ class Bot:
             return True
         else:
             return False
+
+    def send_typing_action(self):
+        res = requests.get(TELEGRAM_SEND_TYPING_ACTION.format(self.chat, 'typing'))
     
     def parse_data(self, data):
         
@@ -55,6 +59,8 @@ class Bot:
             self.send_message('Ok. Estou agora no passo ' + str(count) + '.')
         else:
             if self.msg_count == 1:
+                self.send_typing_action()
+                time.sleep(5)
                 # Pedir ao utilizador para consultar os cinemas mais próximos.
                 self.send_message('Os cinemas NOS perto de si num raio de 20Km são:\nBraga Parque')
             elif self.msg_count == 2:

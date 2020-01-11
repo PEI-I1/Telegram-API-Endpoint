@@ -14,8 +14,16 @@ requests.get(TELEGRAM_INIT_WEBHOOK_URL)
 def index():
     req = request.get_json()
     print(req)
+    if "message" in req and "text" in req["message"] and req["message"]["text"] == '/start':
+        idChat = req["message"]["chat"]["id"]
+        bot.send_message_to_user(
+            idChat, 
+            'Olá! Sou o Bot da NOS!\n' +
+            'Posso-te ajudar com informações sobre <b>cinemas</b>, <b>serviços</b> da NOS e <b>resolução de problemas</b> técnicos.\n' +
+            'Em que te posso ser útil?'    
+        )
     # only tries to answer to user if user sends text or location
-    if "message" in req and \
+    elif "message" in req and \
        ("location" in req["message"] or "text" in req["message"]):
         bot.send_message_to_chat_processor(req)
     return 'ok'

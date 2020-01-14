@@ -33,15 +33,19 @@ def send_message_to_chat_processor(req):
         message = req['callback_query']
 
         data['idChat'] = message['message']['chat']['id']
-        data['idUser'] = message['message']['from']['id']
+        data['idUser'] = message['from']['id']
 
         data['msg'] = str(message['data'].encode('utf-8'), encoding='utf-8')
 
-        data['name'] = message['message']['chat']['first_name']
-        if 'last_name' in message['message']['chat']:
-            data['name'] += " " + message['message']['chat']['last_name']
+        data['name'] = message['from']['first_name']
+        if 'last_name' in message['from']:
+            data['name'] += " " + message['from']['last_name']
 
-        data['location'] = None
+        if 'location' in message['message']:
+            loc = message['message']['location']
+            data['location'] = {'lon': loc['longitude'], 'lat': loc['latitude']}
+        else:
+            data['location'] = None
     
     #Avisa chat_processor que chegou uma nova msg
     res = requests.post(CHAT_PROCESSOR_URL + "/getResponse", json=data)

@@ -14,14 +14,27 @@ requests.get(TELEGRAM_INIT_WEBHOOK_URL)
 def index():
     req = request.get_json()
     print(req)
-    if "message" in req and "text" in req["message"] and req["message"]["text"] == '/start':
-        idChat = req["message"]["chat"]["id"]
-        bot.send_message_to_user(
-            idChat, 
-            'Olá! Sou o Bot da NOS!\n' +
-            'Posso-te ajudar com informações sobre <b>cinemas</b>, <b>serviços</b> da NOS e <b>resolução de problemas</b> técnicos.\n' +
-            'Em que te posso ser útil?'    
-        )
+    if "message" in req and "text" in req["message"]:
+        if req["message"]["text"] == '/start':
+            idChat = req["message"]["chat"]["id"]
+            bot.send_message_to_user(
+                idChat, 
+                'Olá! Sou o Bot da NOS!\n' +
+                'Posso-te ajudar com informações sobre <b>cinemas</b>, <b>serviços da NOS</b> e <b>resolução de problemas técnicos</b>.\n' +
+                'Para mais informações sobre mim utiliza o comando /help.\n' +
+                'Caso encontres uma situação de erro ou desejes reiniciar a interação utiliza o comando /reset.\n' +
+                'Em que te posso ser útil?'    
+            )
+        elif req["message"]["text"] == '/help':
+            idChat = req["message"]["chat"]["id"]
+            bot.send_message_to_user(
+                idChat, 
+                'Este bot pode ser dividido em 3 categorias:\n' + 
+                '* <b>Cinemas</b>: permite a procura de cinemas perto de si, assim como a procura e a obtenção de informações sobre filmes e sessões, consoante variados critérios.\n' +
+                '* <b>Serviços da NOS</b>: permite a procura de linhas de apoio, telemóveis para venda, tarifários WTF, pacotes da NOS (como satélite ou fibra), assim como a procura de lojas da NOS.\n' +
+                '* <b>Resolução de problemas técnicos</b>: permite obter sugestões para resolver os problemas técnicos dos clientes da NOS.\n\n' +
+                'Para além disto, o bot contém ainda um <b>modo interativo</b> que permite guiar o processo de obtenção de informações por parte do utilizador. Para entar neste modo basta enviar uma mensagem como \'modo regras\'.'    
+            )
     # only tries to answer to user if user sends text or location
     elif ("message" in req and ("location" in req["message"] or "text" in req["message"])) or "callback_query" in req:
         bot.send_message_to_chat_processor(req)

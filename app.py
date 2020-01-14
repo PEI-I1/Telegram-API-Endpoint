@@ -14,8 +14,9 @@ requests.get(TELEGRAM_INIT_WEBHOOK_URL)
 def index():
     req = request.get_json()
     print(req)
-    if "message" in req and "text" in req["message"]:
-        if req["message"]["text"] == '/start':
+    if "message" in req and "text" in req["message"] and (req["message"]["text"] == '/start' or req["message"]["text"] == '/help'):
+        command = req["message"]["text"]
+        if command == '/start':
             idChat = req["message"]["chat"]["id"]
             bot.send_message_to_user(
                 idChat, 
@@ -25,7 +26,7 @@ def index():
                 'Caso encontres uma situação de erro ou desejes reiniciar a interação utiliza o comando /reset.\n' +
                 'Em que te posso ser útil?'    
             )
-        elif req["message"]["text"] == '/help':
+        elif command == '/help':
             idChat = req["message"]["chat"]["id"]
             bot.send_message_to_user(
                 idChat, 

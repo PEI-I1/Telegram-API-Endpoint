@@ -1,6 +1,6 @@
 import os
 
-BOT_TOKEN = os.getenv('BOT_TOKEN', '001785159:AAGr9M1x6FsX8Wj4v39dgnRPZV140DuA6Kk')
+BOT_TOKEN = os.getenv('BOT_TOKEN', '')
 NGROK_URL = os.getenv('NGROK_URL', '')
 CHAT_PROCESSOR_URL = os.getenv('CHAT_PROCESSOR_URL', 'http://localhost:5001')
 LOCAL_WEBHOOK_ENDPOINT = '{}/webhook'.format(NGROK_URL)
@@ -12,3 +12,16 @@ TELEGRAM_SEND_PHOTO_URL = BASE_TELEGRAM_API_URL + '/sendPhoto?chat_id={}&photo={
 TELEGRAM_SEND_AUDIO_URL = BASE_TELEGRAM_API_URL + '/sendAudio?chat_id={}&audio={}&caption={}&parse_mode={}'
 TELEGRAM_SEND_REPLY_MARKUP_URL = BASE_TELEGRAM_API_URL + '/sendMessage?chat_id={}&text={}&reply_markup={}'
 TELEGRAM_SEND_TYPING_ACTION = BASE_TELEGRAM_API_URL + '/sendChatAction?chat_id={}&action={}'
+
+msgs = {
+    "/start": 'Olá! Sou o Bot da NOS!\n' +
+        'Posso-te ajudar com informações sobre <b>cinemas</b>, <b>serviços da NOS</b> e <b>resolução de problemas técnicos</b>.\n' +
+        'Para mais informações sobre mim utiliza o comando /help.\n' +
+        'Caso encontres uma situação de erro ou desejes reiniciar a interação utiliza o comando /reset.\n' +
+        'Em que te posso ser útil?',
+    "/help": 'Este bot pode ser dividido em 3 categorias:\n' +
+        '* <b>Cinemas</b>: permite a procura de cinemas perto de si, assim como a procura e a obtenção de informações sobre filmes e sessões, consoante variados critérios.\n' +
+        '* <b>Serviços da NOS</b>: permite a procura de linhas de apoio, telemóveis para venda, tarifários WTF, pacotes da NOS (como satélite ou fibra), assim como a procura de lojas da NOS.\n' +
+        '* <b>Resolução de problemas técnicos</b>: permite obter sugestões para resolver os problemas técnicos dos clientes da NOS.\n\n' +
+        'Para além disto, o bot contém ainda um <b>modo interativo</b> que permite guiar o processo de obtenção de informações por parte do utilizador. Para entar neste modo basta enviar uma mensagem como \'modo regras\'.'
+}

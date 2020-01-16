@@ -17,7 +17,7 @@ msgs = {
     "/start": 'Olá! Sou o assistente da NOS!\n' +
         'Posso-te ajudar com informações sobre <b>cinemas</b>, <b>serviços da NOS</b> e <b>resolução de problemas técnicos</b>.\n' +
         'Para mais informações sobre mim utiliza o comando /help.\n' +
-        'Caso encontres uma situação de erro ou desejes reiniciar a interação utiliza o comando /reset.\n' +
+        'Caso desejes reiniciar a conversa utiliza o comando /reset.\n' +
         'Estou pronto para responder aos teus pedidos nesta conversa!\n\n' +
         'Em que te posso ser útil?',
     "/help": 'Este bot pode ser dividido em 3 categorias:\n' +

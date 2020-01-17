@@ -82,7 +82,7 @@ def get_location(idChat):
     reply_markup={
         'keyboard': [
             [{
-                'text': 'Send Location',
+                'text': 'Enviar Localização',
                 'request_location': True
             }]
         ]
@@ -90,7 +90,7 @@ def get_location(idChat):
     
     payload = {
         'chat_id': idChat,
-        'text': 'Clique no botão em baixo para podermos saber onde está',
+        'text': 'Clica no botão para me enviares a tua localização',
         'reply_markup': json.dumps(reply_markup)
     }
 

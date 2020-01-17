@@ -9,6 +9,7 @@ import json
 app = Flask(__name__)
 print(TELEGRAM_INIT_WEBHOOK_URL)
 requests.get(TELEGRAM_INIT_WEBHOOK_URL)
+bot.notify_start_periodically()
 
 @app.route('/webhook', methods=['POST'])
 def index():

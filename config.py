@@ -26,3 +26,5 @@ msgs = {
         '* <b>Resolução de problemas técnicos</b>: permite obter sugestões para resolver os problemas técnicos dos clientes da NOS.\n\n' +
         'Para além disto, o bot contém ainda um <b>modo interativo</b> que permite guiar o processo de obtenção de informações por parte do utilizador. Para entar neste modo basta utilizar o comando /interativo.'
 }
+
+NOTIFICATION_TIME = 60 # in seconds

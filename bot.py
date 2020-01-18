@@ -1,7 +1,9 @@
 import requests
-from config import TELEGRAM_SEND_MESSAGE_URL, TELEGRAM_SEND_MESSAGE_URL_BASE, TELEGRAM_SEND_PHOTO_URL, TELEGRAM_SEND_AUDIO_URL, CHAT_PROCESSOR_URL, TELEGRAM_SEND_REPLY_MARKUP_URL, TELEGRAM_SEND_TYPING_ACTION, BOT_TOKEN , msgs, NOTIFICATION_TIME
+from config import TELEGRAM_SEND_MESSAGE_URL, TELEGRAM_SEND_MESSAGE_URL_BASE, TELEGRAM_SEND_PHOTO_URL, TELEGRAM_SEND_AUDIO_URL, CHAT_PROCESSOR_URL, TELEGRAM_SEND_REPLY_MARKUP_URL, TELEGRAM_SEND_TYPING_ACTION, INACTIVE_TIME, msgs
 import json, urllib.parse
-from telegram.ext import Updater, CommandHandler
+from datetime import datetime, timedelta
+
+chats_timestamps = {}
 
 def send_message_to_chat_processor(req):
     data = {}
@@ -101,20 +103,17 @@ def get_location(idChat):
     else:
         return False
 
-def notification(bot, job):
-    print("Periodically message sended!!")
-    send_message_to_user(job.context, msgs["/start"] )
-
-def callback_timer(bot, update, job_queue):
-    name = "Notification" + str(update.message.chat_id)
-    for job in job_queue.get_jobs_by_name(name):
-        job.schedule_removal() 
-    print("Starting periodically notifications!!")
-    send_message_to_user(update.message.chat_id, msgs["/start"] )
-    job_queue.run_repeating(notification, NOTIFICATION_TIME , context=update.message.chat_id, name=name )
-
-
-def notify_start_periodically():
-    updater = Updater(BOT_TOKEN)
-    updater.dispatcher.add_handler(CommandHandler('start', callback_timer, pass_job_queue=True))
-    updater.start_polling()
+def save_chat_timestamp(idChat, timestamp):
+    chats_timestamps[idChat] = timestamp
+    
+def msg_inactive_users():
+    now = datetime.now()
+    for idChat in list(chats_timestamps):
+        timestamp = chats_timestamps[idChat]
+        dt = datetime.fromtimestamp(timestamp)
+        # check if last message was more than 'INACTIVE_TIME' time ago
+        if dt < now - timedelta(minutes=INACTIVE_TIME):
+            # send message
+            send_message_to_user(idChat, msgs['inactive'])
+            # remove from dictionary to make sure user don't receive the message more than one time
+            del chats_timestamps[idChat]

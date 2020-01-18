@@ -24,7 +24,14 @@ msgs = {
         '* <b>Cinemas</b>: permite a procura de cinemas perto de si, assim como a procura e a obtenção de informações sobre filmes e sessões, consoante variados critérios.\n' +
         '* <b>Serviços da NOS</b>: permite a procura de linhas de apoio, telemóveis para venda, tarifários WTF, pacotes da NOS (como satélite ou fibra), assim como a procura de lojas da NOS.\n' +
         '* <b>Resolução de problemas técnicos</b>: permite obter sugestões para resolver os problemas técnicos dos clientes da NOS.\n\n' +
-        'Para além disto, o bot contém ainda um <b>modo interativo</b> que permite guiar o processo de obtenção de informações por parte do utilizador. Para entar neste modo basta utilizar o comando /interativo.'
+        'Para além disto, o bot contém ainda um <b>modo interativo</b> que permite guiar o processo de obtenção de informações por parte do utilizador. Para entar neste modo basta utilizar o comando /interativo.',
+    "inactive": 'Ainda te lembras de mim? Sou o assistente da NOS!\n' +
+        'Posso-te ajudar com informações sobre <b>cinemas</b>, <b>serviços da NOS</b> e <b>resolução de problemas técnicos</b>.\n' +
+        'Para mais informações sobre mim utiliza o comando /help.\n' +
+        'Caso desejes reiniciar a conversa utiliza o comando /reset.\n' +
+        'Estou pronto para responder aos teus pedidos nesta conversa!\n\n' +
+        'Em que te posso ser útil?',
 }
 
-NOTIFICATION_TIME = 60 # in seconds
+INACTIVE_TIME = 5 # minutes
+NOTIFICATION_TASK_INTERVAL = 1 # minutes

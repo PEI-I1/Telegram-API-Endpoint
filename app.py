@@ -20,7 +20,7 @@ def index():
         bot.save_chat_timestamp(idChat, timestamp)
         if "text" in req["message"]:
             if req["message"]["text"] == '/start' or req["message"]["text"] == '/help':
-                bot.send_message_to_user(idChat, msgs[req["message"]["text"]])
+                bot.send_message_to_user(idChat, msgs[req["message"]["text"]], False)
             else:
                 bot.send_message_to_chat_processor(req)
         elif "location" in req["message"]:
@@ -34,7 +34,7 @@ def index():
 
 @app.route('/send_message/<string:idChat>', methods=['POST'])
 def send_message(idChat):
-    bot.send_message_to_user(idChat, request.get_data().decode('utf-8'))
+    bot.send_message_to_user(idChat, request.get_data().decode('utf-8'), False)
     return 'ok'
 
 @app.route('/send_photo/<string:idChat>', methods=['POST'])

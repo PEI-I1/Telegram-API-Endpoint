@@ -53,9 +53,9 @@ def send_message_to_chat_processor(req):
     #Avisa chat_processor que chegou uma nova msg
     res = requests.post(CHAT_PROCESSOR_URL + "/getResponse", json=data)
 
-def send_message_to_user(idChat, msg):
+def send_message_to_user(idChat, msg, disable_notification):
     msg = urllib.parse.quote(msg, safe='')
-    res = requests.get(TELEGRAM_SEND_MESSAGE_URL.format(idChat, msg, 'HTML'))
+    res = requests.get(TELEGRAM_SEND_MESSAGE_URL.format(idChat, msg, 'HTML', disable_notification))
     if res.status_code == 200:
         return True
     else:
@@ -114,6 +114,6 @@ def msg_inactive_users():
         # check if last message was more than 'INACTIVE_TIME' time ago
         if dt < now - timedelta(minutes=INACTIVE_TIME):
             # send message
-            send_message_to_user(idChat, msgs['inactive'])
+            send_message_to_user(idChat, msgs['inactive'], True)
             # remove from dictionary to make sure user don't receive the message more than one time
             del chats_timestamps[idChat]

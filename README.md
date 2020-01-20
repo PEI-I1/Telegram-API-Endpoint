@@ -33,6 +33,7 @@ POST /webhook
 | `message.from.last_name` | `string` | **Required**. User last name. |
 | `message.chat.id` | `int` | **Required**. Chat id. |
 | `message.text` | `string` | **Optional**. User message. |
+| `message.date` | `int` | **Required**. Message Date in Unix time. |
 | `location.latitude` | `float` | **Optional**. User latitude location. |
 | `location.longitude` | `float` | **Optional**. User longitude location. |
 
@@ -48,7 +49,8 @@ Example:
         'chat': {
             'id': 912544244
         },
-        'text': 'cinemas'
+        'text': 'cinemas',
+        'date': 1579519622
     }
 }
 ```
@@ -68,7 +70,8 @@ Example with location:
         'location': {
             'latitude': 33.542111,
             'longitude': -10.444713
-        }
+        },
+        'date': 1579519622
     }
 }
 ```
@@ -88,6 +91,20 @@ POST /send_message/<string:idChat>
 The `body` should have the messsage encoded in 'UTF-8'.
 
 Will show a message in Telegram user chat.
+
+------
+</details>
+
+<details>
+<summary>Send a silent message to user</summary>
+
+```http
+POST /send_silent_message/<string:idChat>
+```
+
+The `body` should have the messsage encoded in 'UTF-8'.
+
+Will show a silent message in Telegram user chat.
 
 ------
 </details>

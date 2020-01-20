@@ -1,9 +1,6 @@
 import requests
-from config import TELEGRAM_SEND_MESSAGE_URL, TELEGRAM_SEND_MESSAGE_URL_BASE, TELEGRAM_SEND_PHOTO_URL, TELEGRAM_SEND_AUDIO_URL, CHAT_PROCESSOR_URL, TELEGRAM_SEND_REPLY_MARKUP_URL, TELEGRAM_SEND_TYPING_ACTION, INACTIVE_TIME, msgs
+from config import TELEGRAM_SEND_MESSAGE_URL, TELEGRAM_SEND_MESSAGE_URL_BASE, TELEGRAM_SEND_PHOTO_URL, TELEGRAM_SEND_AUDIO_URL, CHAT_PROCESSOR_URL, TELEGRAM_SEND_REPLY_MARKUP_URL, TELEGRAM_SEND_TYPING_ACTION
 import json, urllib.parse
-from datetime import datetime, timedelta
-
-chats_timestamps = {}
 
 def send_message_to_chat_processor(req):
     data = {}
@@ -25,6 +22,9 @@ def send_message_to_chat_processor(req):
         if 'last_name' in message['from']:
             data['name'] += " " + message['from']['last_name']
 
+        # Timestamp
+        data['timestamp'] = message['date']
+
         # Location
         if 'location' in message:
             loc = message['location']
@@ -43,6 +43,8 @@ def send_message_to_chat_processor(req):
         data['name'] = message['from']['first_name']
         if 'last_name' in message['from']:
             data['name'] += " " + message['from']['last_name']
+
+        data['timestamp'] = message['message']['date']
 
         if 'location' in message['message']:
             loc = message['message']['location']
@@ -102,18 +104,3 @@ def get_location(idChat):
         return True
     else:
         return False
-
-def save_chat_timestamp(idChat, timestamp):
-    chats_timestamps[idChat] = timestamp
-    
-def msg_inactive_users():
-    now = datetime.now()
-    for idChat in list(chats_timestamps):
-        timestamp = chats_timestamps[idChat]
-        dt = datetime.fromtimestamp(timestamp)
-        # check if last message was more than 'INACTIVE_TIME' time ago
-        if dt < now - timedelta(minutes=INACTIVE_TIME):
-            # send message
-            send_message_to_user(idChat, msgs['inactive'], True)
-            # remove from dictionary to make sure user don't receive the message more than one time
-            del chats_timestamps[idChat]
